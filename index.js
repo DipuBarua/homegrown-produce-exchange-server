@@ -27,8 +27,9 @@ async function run() {
         await client.connect();
 
         const homegrownCollection = client.db('homegrownDB').collection('products');
+        const bookingCollection = client.db('homegrownDB').collection('bookings');
 
-
+        // products -- API operations 
         app.get('/products', async (req, res) => {
             const cursor = homegrownCollection.find();
             const result = await cursor.toArray();
@@ -42,6 +43,13 @@ async function run() {
             res.send(result);
         })
 
+        // bookings -- API operations 
+        app.post('/bookings', async (req, res) => {
+            const booking = req.body;
+            console.log(booking);
+            const result = await bookingCollection.insertOne(booking);
+            res.send(result);
+        })
 
 
         // Send a ping to confirm a successful connection
