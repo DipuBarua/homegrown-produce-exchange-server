@@ -43,6 +43,15 @@ async function run() {
             res.send(result);
         })
 
+        app.post('/products', async (req, res) => {
+            const newService = req.body;
+            console.log(newService);
+            const result = await homegrownCollection.insertOne(newService);
+            res.send(result);
+        })
+
+
+        
         // bookings -- API operations 
         app.post('/bookings', async (req, res) => {
             const booking = req.body;
